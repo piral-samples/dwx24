@@ -1,0 +1,50 @@
+{
+  "name": "ng1-v16",
+  "version": "0.1.0",
+  "description": "First Angular pilet - for Angular 16",
+  "keywords": [
+    "pilet"
+  ],
+  "importmap": {
+    "imports": {
+      "@angular/core": "@angular/core",
+      "@angular/common": "@angular/common",
+      "@angular/compiler": "@angular/compiler",
+      "@angular/platform-browser": "@angular/platform-browser",
+      "@angular/platform-browser-dynamic": "@angular/platform-browser-dynamic",
+      "@angular/router": "@angular/router",
+      "piral-ng-common": "piral-ng-common"
+    },
+    "inherit": [
+      "spa-app"
+    ]
+  },
+  "dependencies": {
+    "@angular/common": "^16",
+    "@angular/compiler": "^16",
+    "@angular/core": "^16",
+    "@angular/router": "^16",
+    "@angular/platform-browser": "^16",
+    "@angular/platform-browser-dynamic": "^16",
+    "piral-ng": "1.5.6",
+    "piral-ng-common": "^16"
+  },
+  "devDependencies": {
+    "@angular/compiler-cli": "^16",
+    "@ngtools/webpack": "^16",
+    "copy-webpack-plugin": "^10",
+    "html-loader": "^3",
+    "to-string-loader": "^1",
+    "piral-cli": "1.5.6",
+    "piral-cli-webpack5": "1.5.6"
+  },
+  "scripts": {
+    "start": "pilet debug",
+    "build": "pilet build",
+    "deploy": "pilet publish --fresh --url https://feed.piral.cloud/api/v1/pilet/dwx24-demo --interactive"
+  },
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ]
+}

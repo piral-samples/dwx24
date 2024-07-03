@@ -1,0 +1,50 @@
+{
+  "name": "ng3-v17",
+  "version": "0.1.0",
+  "description": "Third Angular pilet - for Angular 17",
+  "keywords": [
+    "pilet"
+  ],
+  "importmap": {
+    "imports": {
+      "@angular/core": "@angular/core",
+      "@angular/common": "@angular/common",
+      "@angular/compiler": "@angular/compiler",
+      "@angular/platform-browser": "@angular/platform-browser",
+      "@angular/platform-browser-dynamic": "@angular/platform-browser-dynamic",
+      "@angular/router": "@angular/router",
+      "piral-ng-common": "piral-ng-common"
+    },
+    "inherit": [
+      "spa-app"
+    ]
+  },
+  "dependencies": {
+    "@angular/common": "^17",
+    "@angular/compiler": "^17",
+    "@angular/core": "^17",
+    "@angular/router": "^17",
+    "@angular/platform-browser": "^17",
+    "@angular/platform-browser-dynamic": "^17",
+    "piral-ng": "1.5.6",
+    "piral-ng-common": "^17"
+  },
+  "devDependencies": {
+    "@angular/compiler-cli": "^17",
+    "@ngtools/webpack": "^17",
+    "copy-webpack-plugin": "^10",
+    "html-loader": "^3",
+    "to-string-loader": "^1",
+    "piral-cli": "1.5.6",
+    "piral-cli-webpack5": "1.5.6"
+  },
+  "scripts": {
+    "start": "pilet debug",
+    "build": "pilet build",
+    "deploy": "pilet publish --fresh --url https://feed.piral.cloud/api/v1/pilet/dwx24-demo --interactive"
+  },
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ]
+}
