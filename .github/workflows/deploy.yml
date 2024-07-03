@@ -24,27 +24,11 @@ jobs:
           mv dist/emulator dist/release/
           echo "dwx24.samples.piral.cloud" > dist/release/CNAME
           cp dist/release/index.html dist/release/404.html
-          cd ..
-
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v2
-        with:
-          name: webapp
-          path: apps/spa/dist/release
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v2
-        with:
-          name: webapp
+          cd ../..
 
       - name: Deploy Website
         run: |
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          gh-pages -d "dist/release" -u "github-actions-bot <support+actions@github.com>"
+          gh-pages -d "apps/spa/dist/release" -u "github-actions-bot <support+actions@github.com>"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
