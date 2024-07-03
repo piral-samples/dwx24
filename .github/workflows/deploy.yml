@@ -28,8 +28,9 @@ jobs:
 
       - name: Deploy Website
         run: |
-          npm i gh-pages -g
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          gh-pages -d "apps/spa/dist/release" -u "github-actions-bot <support+actions@github.com>"
+          cd apps/spa
+          npx gh-pages -d "dist/release" -u "github-actions-bot <support+actions@github.com>"
+          cd ../..
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
