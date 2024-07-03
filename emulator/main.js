@@ -35583,7 +35583,7 @@
         dependencies: "tslib,react,react-dom,react-router,react-router-dom"
       },
       build: {
-        date: "2024-07-03T23:10:44.222Z",
+        date: "2024-07-03T23:44:09.240Z",
         cli: "1.5.6",
         compat: "1"
       }
