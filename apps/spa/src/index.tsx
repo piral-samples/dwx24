@@ -11,6 +11,7 @@ import { getCurrentUser } from './auth';
 
 const root = createRoot(document.querySelector('#app'));
 const user = getCurrentUser();
+const autoUpdate = process.env.DEBUG_PILET === 'on';
 
 if (!user) {
   root.render(<SelectUser />);
@@ -23,12 +24,13 @@ if (!user) {
     },
     plugins: [
       ...createStandardApi(),
-      createUpdateApi({
-        listen: checkPeriodically({
-          period: 10 * 1000,
+      autoUpdate &&
+        createUpdateApi({
+          listen: checkPeriodically({
+            period: 10 * 1000,
+          }),
         }),
-      }),
-    ],
+    ].filter(Boolean),
     requestPilets() {
       return fetch(`${feedUrl}?role=${user.role}&target=spa`)
         .then((res) => res.json())
