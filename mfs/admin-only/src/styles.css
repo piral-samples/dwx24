@@ -1,30 +1,25 @@
 .widget {
   box-sizing: border-box;
-  height: 14vh;
+  width: 100%;
   border: 2px solid #56AA1C;
-  margin-bottom: 1.5vh;
-  padding: 4vh;
-  font-size: 2.5vh;
+  padding: 2rem;
+  font-size: 1.2rem;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   overflow: hidden;
+  gap: 2rem;
 }
 
 .icon {
-  width: 7vh;
-  height: 7vh;
-}
-
-.text {
-  margin-right: 3vw;
-  margin-left: 6vw;
+  width: 3rem;
+  height: 3rem;
 }
 
 .devices {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 2vh;
+  gap: 1rem;
 }

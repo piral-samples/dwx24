@@ -1,6 +1,6 @@
 {
   "name": "admin-only",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Micro frontend that is only rolled out for admins",
   "keywords": [
     "pilet"
