@@ -35583,7 +35583,7 @@
         dependencies: "tslib,react,react-dom,react-router,react-router-dom"
       },
       build: {
-        date: "2024-07-04T09:25:51.499Z",
+        date: "2024-07-04T10:11:53.124Z",
         cli: "1.5.6",
         compat: "1"
       }
@@ -38072,6 +38072,7 @@
   // src/index.tsx
   var root = (0, import_client.createRoot)(document.querySelector("#app"));
   var user = getCurrentUser();
+  var autoUpdate = true;
   if (!user) {
     root.render(/* @__PURE__ */ React40.createElement(SelectUser, null));
   } else {
@@ -38083,12 +38084,12 @@
       },
       plugins: [
         ...createStandardApi(),
-        createUpdateApi({
+        autoUpdate && createUpdateApi({
           listen: checkPeriodically({
             period: 10 * 1e3
           })
         })
-      ],
+      ].filter(Boolean),
       requestPilets() {
         return fetch(`${feedUrl}?role=${user.role}&target=spa`).then((res) => res.json()).then((res) => res.items);
       }
