@@ -1,0 +1,30 @@
+.widget {
+  box-sizing: border-box;
+  height: 14vh;
+  border: 2px solid #56AA1C;
+  margin-bottom: 1.5vh;
+  padding: 4vh;
+  font-size: 2.5vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.icon {
+  width: 7vh;
+  height: 7vh;
+}
+
+.text {
+  margin-right: 3vw;
+  margin-left: 6vw;
+}
+
+.devices {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2vh;
+}
