@@ -19,7 +19,7 @@ const Profile: React.FC<ExtensionComponentProps<ProfileData>> = ({ params }) => 
       <img src={user.icon} width="24" height="24" />
       <span>{user.name}</span>
       <a href="#" onClick={exit} title="Logout" style={{ padding: '0' }}>
-      <img src={powerOff} width="22" height="22" />
+        <img src={powerOff} width="22" height="22" />
       </a>
     </div>
   );
