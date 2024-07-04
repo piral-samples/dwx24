@@ -21,7 +21,7 @@ function logout(e: React.SyntheticEvent) {
 
 const showSimpleLogout = () => {
   return (
-    <a className="nav-link text-dark" href="#" onClick={logout}>
+    <a href="#" onClick={logout}>
       Logout
     </a>
   );
