@@ -1,0 +1,40 @@
+{
+  "name": "spa-ssr",
+  "version": "0.1.0",
+  "description": "The SSR app shell.",
+  "keywords": [
+    "piral"
+  ],
+  "dependencies": {
+    "express": "^4",
+    "picard-js": "0.0.5",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-router": "^5",
+    "react-router-dom": "^5"
+  },
+  "scripts": {
+    "start": "MY_SECRET=DWXrocks node dist/server.js",
+    "build": "node build.js"
+  },
+  "app": "./src/index.html",
+  "types": "dist/index.d.ts",
+  "importmap": {
+    "imports": {},
+    "inherit": [
+      "piral-base",
+      "piral-core",
+      "piral"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@types/react-router": "^5",
+    "@types/react-router-dom": "^5",
+    "esbuild": "0.23.0",
+    "esbuild-sass-plugin": "^3.3.1",
+    "typescript": "latest"
+  }
+}
