@@ -5760,7 +5760,7 @@
           var HostPortal = 4;
           var HostComponent = 5;
           var HostText = 6;
-          var Fragment9 = 7;
+          var Fragment8 = 7;
           var Mode = 8;
           var ContextConsumer = 9;
           var ContextProvider = 10;
@@ -6916,7 +6916,7 @@
                 return "DehydratedFragment";
               case ForwardRef:
                 return getWrappedName$1(type, type.render, "ForwardRef");
-              case Fragment9:
+              case Fragment8:
                 return "Fragment";
               case HostComponent:
                 return type;
@@ -15317,7 +15317,7 @@
               }
             }
             function updateFragment2(returnFiber, current2, fragment, lanes, key) {
-              if (current2 === null || current2.tag !== Fragment9) {
+              if (current2 === null || current2.tag !== Fragment8) {
                 var created = createFiberFromFragment(fragment, returnFiber.mode, lanes, key);
                 created.return = returnFiber;
                 return created;
@@ -15720,7 +15720,7 @@
                 if (child.key === key) {
                   var elementType = element.type;
                   if (elementType === REACT_FRAGMENT_TYPE) {
-                    if (child.tag === Fragment9) {
+                    if (child.tag === Fragment8) {
                       deleteRemainingChildren(returnFiber, child.sibling);
                       var existing = useFiber(child, element.props.children);
                       existing.return = returnFiber;
@@ -21197,7 +21197,7 @@
                 var _resolvedProps2 = workInProgress2.elementType === type ? _unresolvedProps2 : resolveDefaultProps(type, _unresolvedProps2);
                 return updateForwardRef(current2, workInProgress2, type, _resolvedProps2, renderLanes2);
               }
-              case Fragment9:
+              case Fragment8:
                 return updateFragment(current2, workInProgress2, renderLanes2);
               case Mode:
                 return updateMode(current2, workInProgress2, renderLanes2);
@@ -21470,7 +21470,7 @@
               case SimpleMemoComponent:
               case FunctionComponent:
               case ForwardRef:
-              case Fragment9:
+              case Fragment8:
               case Mode:
               case Profiler:
               case ContextConsumer:
@@ -25729,7 +25729,7 @@
             return fiber;
           }
           function createFiberFromFragment(elements, mode, lanes, key) {
-            var fiber = createFiber(Fragment9, elements, key, mode);
+            var fiber = createFiber(Fragment8, elements, key, mode);
             fiber.lanes = lanes;
             return fiber;
           }
@@ -27222,7 +27222,7 @@
           var ContextProvider = REACT_PROVIDER_TYPE;
           var Element2 = REACT_ELEMENT_TYPE;
           var ForwardRef = REACT_FORWARD_REF_TYPE;
-          var Fragment9 = REACT_FRAGMENT_TYPE;
+          var Fragment8 = REACT_FRAGMENT_TYPE;
           var Lazy = REACT_LAZY_TYPE;
           var Memo = REACT_MEMO_TYPE;
           var Portal = REACT_PORTAL_TYPE;
@@ -27281,7 +27281,7 @@
           exports.ContextProvider = ContextProvider;
           exports.Element = Element2;
           exports.ForwardRef = ForwardRef;
-          exports.Fragment = Fragment9;
+          exports.Fragment = Fragment8;
           exports.Lazy = Lazy;
           exports.Memo = Memo;
           exports.Portal = Portal;
@@ -35583,7 +35583,7 @@
         dependencies: "tslib,react,react-dom,react-router,react-router-dom"
       },
       build: {
-        date: "2024-07-03T23:44:09.240Z",
+        date: "2024-07-04T09:25:51.499Z",
         cli: "1.5.6",
         compat: "1"
       }
@@ -37974,17 +37974,25 @@
   // src/SelectUser.tsx
   var React38 = __toESM(require_react());
 
+  // src/images/man1.png
+  var man1_default = "/man1-FN3NQECM.png";
+
+  // src/images/woman1.png
+  var woman1_default = "/woman1-UQR4JKHW.png";
+
   // src/auth.ts
   var users = [
     {
       id: "bernd",
       name: "Bernd Müller",
-      role: "Standard"
+      role: "Standard",
+      icon: man1_default
     },
     {
       id: "stefanie",
       name: "Stefanie Holzer",
-      role: "Administrator"
+      role: "Administrator",
+      icon: woman1_default
     }
   ];
   function getUsers() {
@@ -38005,7 +38013,7 @@
 
   // src/SelectUser.tsx
   var SelectUser = () => {
-    return /* @__PURE__ */ React38.createElement(React38.Fragment, null, /* @__PURE__ */ React38.createElement("h1", null, "Select User"), /* @__PURE__ */ React38.createElement("ul", null, getUsers().map((user2) => /* @__PURE__ */ React38.createElement("li", { key: user2.id }, /* @__PURE__ */ React38.createElement("button", { onClick: () => loginUser(user2.id) }, user2.name, " (", user2.role, ")")))));
+    return /* @__PURE__ */ React38.createElement("div", { className: "app-center" }, /* @__PURE__ */ React38.createElement("ul", { className: "select-user" }, getUsers().map((user2) => /* @__PURE__ */ React38.createElement("li", { key: user2.id }, /* @__PURE__ */ React38.createElement("button", { onClick: () => loginUser(user2.id), className: "select-user-button" }, /* @__PURE__ */ React38.createElement("img", { className: "select-user-icon", src: user2.icon, alt: "user icon" }), /* @__PURE__ */ React38.createElement("span", { className: "select-user-name" }, user2.name), /* @__PURE__ */ React38.createElement("span", { className: "select-user-role" }, user2.role))))));
   };
 
   // src/layout.tsx
@@ -38015,19 +38023,30 @@
     e.preventDefault();
     logoutCurrentUser();
   }
-  var defaultMenuItems = /* @__PURE__ */ React39.createElement(React39.Fragment, null, /* @__PURE__ */ React39.createElement(MenuItem, { type: "general", meta: {} }, /* @__PURE__ */ React39.createElement("a", { className: "nav-link text-dark", href: "#", onClick: logout }, "Logout")));
+  var showSimpleLogout = () => {
+    return /* @__PURE__ */ React39.createElement("a", { className: "nav-link text-dark", href: "#", onClick: logout }, "Logout");
+  };
+  var defaultMenuItems = /* @__PURE__ */ React39.createElement(React39.Fragment, null, /* @__PURE__ */ React39.createElement(MenuItem, { type: "general", meta: {} }, /* @__PURE__ */ React39.createElement(
+    ExtensionSlot,
+    {
+      name: "user-profile-menu",
+      empty: showSimpleLogout,
+      params: { user: getCurrentUser(), logout: logoutCurrentUser }
+    }
+  )));
   var errors = {
     not_found: () => /* @__PURE__ */ React39.createElement("div", null, /* @__PURE__ */ React39.createElement("p", { className: "error" }, "Could not find the requested page. Are you sure it exists?"), /* @__PURE__ */ React39.createElement("p", null, "Go back ", /* @__PURE__ */ React39.createElement(Link, { to: "/" }, "to the dashboard"), "."))
   };
   var layout = {
     ErrorInfo: (props) => /* @__PURE__ */ React39.createElement("div", null, /* @__PURE__ */ React39.createElement("h1", null, "Error"), /* @__PURE__ */ React39.createElement(SwitchErrorInfo, { ...props })),
+    LoadingIndicator: () => /* @__PURE__ */ React39.createElement("div", { className: "app-center" }, /* @__PURE__ */ React39.createElement("div", { className: "lds-ellipsis" }, /* @__PURE__ */ React39.createElement("div", null), /* @__PURE__ */ React39.createElement("div", null), /* @__PURE__ */ React39.createElement("div", null), /* @__PURE__ */ React39.createElement("div", null))),
     DashboardContainer: ({ children }) => /* @__PURE__ */ React39.createElement("div", null, /* @__PURE__ */ React39.createElement("h1", null, "Hello, ", getCurrentUser().name, "!"), /* @__PURE__ */ React39.createElement("p", null, "Welcome to the DWX 24 demo web app."), /* @__PURE__ */ React39.createElement("div", { className: "tiles" }, children)),
     UpdateDialog: ({ onApprove, onReject }) => /* @__PURE__ */ React39.createElement("div", null, /* @__PURE__ */ React39.createElement("p", null, /* @__PURE__ */ React39.createElement("b", null, "New update ready!")), /* @__PURE__ */ React39.createElement("button", { onClick: onReject }, "Skip"), /* @__PURE__ */ React39.createElement("button", { onClick: onApprove }, "Install")),
     DashboardTile: ({ columns, rows, children }) => /* @__PURE__ */ React39.createElement("div", { className: `tile cols-${columns} rows-${rows}` }, children),
-    Layout: ({ children }) => /* @__PURE__ */ React39.createElement("div", null, /* @__PURE__ */ React39.createElement(Notifications, null), /* @__PURE__ */ React39.createElement(Menu, { type: "general" }), /* @__PURE__ */ React39.createElement(UpdateDialog, null), /* @__PURE__ */ React39.createElement("div", { className: "container" }, children)),
+    Layout: ({ children }) => /* @__PURE__ */ React39.createElement(React39.Fragment, null, /* @__PURE__ */ React39.createElement(Notifications, null), /* @__PURE__ */ React39.createElement(Menu, { type: "general" }), /* @__PURE__ */ React39.createElement(UpdateDialog, null), /* @__PURE__ */ React39.createElement("div", { className: "container app-content" }, children), /* @__PURE__ */ React39.createElement("footer", null, /* @__PURE__ */ React39.createElement("div", { className: "container" }, "© Florian Rappl, 2004.", " ", /* @__PURE__ */ React39.createElement("a", { href: "https://www.flaticon.com/free-icons/person", title: "person icons", target: "_blank" }, "Person icons created by Freepik - Flaticon")))),
     MenuContainer: ({ children }) => {
       const [collapsed, setCollapsed] = React39.useState(true);
-      return /* @__PURE__ */ React39.createElement("header", null, /* @__PURE__ */ React39.createElement("nav", { className: "navbar navbar-light navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" }, /* @__PURE__ */ React39.createElement("div", { className: "container" }, /* @__PURE__ */ React39.createElement(Link, { className: "navbar-brand", to: "/" }, "DWX 24 Demo"), /* @__PURE__ */ React39.createElement(
+      return /* @__PURE__ */ React39.createElement("header", null, /* @__PURE__ */ React39.createElement("nav", { className: "navbar navbar-light navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" }, /* @__PURE__ */ React39.createElement("div", { className: "container" }, /* @__PURE__ */ React39.createElement(Link, { className: "navbar-brand", to: "/" }, "DWX 24 Demos"), /* @__PURE__ */ React39.createElement(
         "button",
         {
           "aria-label": "Toggle navigation",

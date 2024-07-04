@@ -2,7 +2,7 @@
   "name": "spa-app",
   "description": "The SPA app shell.",
   "version": "0.1.0",
-  "timestamp": "2024-07-03T23:44:09.527Z",
+  "timestamp": "2024-07-04T09:25:51.770Z",
   "scaffolding": {
     "pilets": {
       "files": [],
@@ -26,8 +26,10 @@
       "index.html",
       "main.js",
       "main.js.map",
+      "man1-FN3NQECM.png",
       "style.css",
-      "style.css.map"
+      "style.css.map",
+      "woman1-UQR4JKHW.png"
     ]
   },
   "importmap": {
