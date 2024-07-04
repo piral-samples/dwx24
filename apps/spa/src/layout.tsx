@@ -1,6 +1,14 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { ComponentsState, ErrorComponentsState, Menu, Notifications, SwitchErrorInfo, MenuItemProps } from 'piral';
+import {
+  ComponentsState,
+  ErrorComponentsState,
+  Menu,
+  Notifications,
+  SwitchErrorInfo,
+  MenuItemProps,
+  ExtensionSlot,
+} from 'piral';
 import { getCurrentUser, logoutCurrentUser } from './auth';
 import { UpdateDialog } from 'piral-update';
 
@@ -11,12 +19,22 @@ function logout(e: React.SyntheticEvent) {
   logoutCurrentUser();
 }
 
+const showSimpleLogout = () => {
+  return (
+    <a className="nav-link text-dark" href="#" onClick={logout}>
+      Logout
+    </a>
+  );
+};
+
 const defaultMenuItems = (
   <>
     <MenuItem type="general" meta={{}}>
-      <a className="nav-link text-dark" href="#" onClick={logout}>
-        Logout
-      </a>
+      <ExtensionSlot
+        name="user-profile-menu"
+        empty={showSimpleLogout}
+        params={{ user: getCurrentUser(), logout: logoutCurrentUser }}
+      />
     </MenuItem>
   </>
 );
@@ -39,13 +57,21 @@ export const layout: Partial<ComponentsState> = {
       <SwitchErrorInfo {...props} />
     </div>
   ),
+  LoadingIndicator: () => (
+    <div className="app-center">
+      <div className="lds-ellipsis">
+        <div />
+        <div />
+        <div />
+        <div />
+      </div>
+    </div>
+  ),
   DashboardContainer: ({ children }) => (
     <div>
       <h1>Hello, {getCurrentUser().name}!</h1>
       <p>Welcome to the DWX 24 demo web app.</p>
-      <div className="tiles">
-        {children}
-      </div>
+      <div className="tiles">{children}</div>
     </div>
   ),
   UpdateDialog: ({ onApprove, onReject }) => (
@@ -59,12 +85,20 @@ export const layout: Partial<ComponentsState> = {
   ),
   DashboardTile: ({ columns, rows, children }) => <div className={`tile cols-${columns} rows-${rows}`}>{children}</div>,
   Layout: ({ children }) => (
-    <div>
+    <>
       <Notifications />
       <Menu type="general" />
       <UpdateDialog />
-      <div className="container">{children}</div>
-    </div>
+      <div className="container app-content">{children}</div>
+      <footer>
+        <div className="container">
+          &copy; Florian Rappl, 2004.{' '}
+          <a href="https://www.flaticon.com/free-icons/person" title="person icons" target="_blank">
+            Person icons created by Freepik - Flaticon
+          </a>
+        </div>
+      </footer>
+    </>
   ),
   MenuContainer: ({ children }) => {
     const [collapsed, setCollapsed] = React.useState(true);
@@ -73,7 +107,7 @@ export const layout: Partial<ComponentsState> = {
         <nav className="navbar navbar-light navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3">
           <div className="container">
             <Link className="navbar-brand" to="/">
-              DWX 24 Demo
+              DWX 24 Demos
             </Link>
             <button
               aria-label="Toggle navigation"

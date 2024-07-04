@@ -1,13 +1,18 @@
+import bernd from './images/man1.png';
+import stefanie from './images/woman1.png';
+
 const users = [
   {
     id: 'bernd',
     name: 'Bernd Müller',
     role: 'Standard',
+    icon: bernd,
   },
   {
     id: 'stefanie',
     name: 'Stefanie Holzer',
     role: 'Administrator',
+    icon: stefanie,
   },
 ];
 
