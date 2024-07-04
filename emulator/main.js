@@ -35583,7 +35583,7 @@
         dependencies: "tslib,react,react-dom,react-router,react-router-dom"
       },
       build: {
-        date: "2024-07-04T10:11:53.124Z",
+        date: "2024-07-04T10:16:12.762Z",
         cli: "1.5.6",
         compat: "1"
       }
@@ -38069,10 +38069,17 @@
     NotificationsToast: ({ options, onClose, children }) => /* @__PURE__ */ React39.createElement("div", { className: `notification-toast ${options.type}` }, /* @__PURE__ */ React39.createElement("div", { className: "notification-toast-details" }, options.title && /* @__PURE__ */ React39.createElement("div", { className: "notification-toast-title" }, options.title), /* @__PURE__ */ React39.createElement("div", { className: "notification-toast-description" }, children)), /* @__PURE__ */ React39.createElement("div", { className: "notification-toast-close", onClick: onClose }))
   };
 
+  // src/update.ts
+  var autoUpdate = false;
+
   // src/index.tsx
   var root = (0, import_client.createRoot)(document.querySelector("#app"));
   var user = getCurrentUser();
-  var autoUpdate = true;
+  var every10Seconds = {
+    period: 10 * 1e3
+  };
+  var neverCheck = () => {
+  };
   if (!user) {
     root.render(/* @__PURE__ */ React40.createElement(SelectUser, null));
   } else {
@@ -38084,12 +38091,10 @@
       },
       plugins: [
         ...createStandardApi(),
-        autoUpdate && createUpdateApi({
-          listen: checkPeriodically({
-            period: 10 * 1e3
-          })
+        createUpdateApi({
+          listen: autoUpdate ? checkPeriodically(every10Seconds) : neverCheck
         })
-      ].filter(Boolean),
+      ],
       requestPilets() {
         return fetch(`${feedUrl}?role=${user.role}&target=spa`).then((res) => res.json()).then((res) => res.items);
       }
