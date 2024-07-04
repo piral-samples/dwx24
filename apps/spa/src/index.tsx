@@ -8,10 +8,14 @@ import { checkPeriodically, createUpdateApi } from 'piral-update';
 import { SelectUser } from './SelectUser';
 import { layout, errors } from './layout';
 import { getCurrentUser } from './auth';
+import { autoUpdate } from './update';
 
 const root = createRoot(document.querySelector('#app'));
 const user = getCurrentUser();
-const autoUpdate = process.env.DEBUG_PILET === 'on';
+const every10Seconds = {
+  period: 10 * 1000,
+};
+const neverCheck = () => {};
 
 if (!user) {
   root.render(<SelectUser />);
@@ -24,13 +28,10 @@ if (!user) {
     },
     plugins: [
       ...createStandardApi(),
-      autoUpdate &&
-        createUpdateApi({
-          listen: checkPeriodically({
-            period: 10 * 1000,
-          }),
-        }),
-    ].filter(Boolean),
+      createUpdateApi({
+        listen: autoUpdate ? checkPeriodically(every10Seconds) : neverCheck,
+      }),
+    ],
     requestPilets() {
       return fetch(`${feedUrl}?role=${user.role}&target=spa`)
         .then((res) => res.json())

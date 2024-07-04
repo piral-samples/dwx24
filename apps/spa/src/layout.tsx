@@ -9,8 +9,8 @@ import {
   MenuItemProps,
   ExtensionSlot,
 } from 'piral';
-import { getCurrentUser, logoutCurrentUser } from './auth';
 import { UpdateDialog } from 'piral-update';
+import { getCurrentUser, logoutCurrentUser } from './auth';
 
 const MenuItem: React.FC<MenuItemProps> = ({ children }) => <li className="nav-item">{children}</li>;
 
