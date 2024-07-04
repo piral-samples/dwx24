@@ -35583,7 +35583,7 @@
         dependencies: "tslib,react,react-dom,react-router,react-router-dom"
       },
       build: {
-        date: "2024-07-04T10:16:12.762Z",
+        date: "2024-07-04T11:56:30.205Z",
         cli: "1.5.6",
         compat: "1"
       }
@@ -38024,7 +38024,7 @@
     logoutCurrentUser();
   }
   var showSimpleLogout = () => {
-    return /* @__PURE__ */ React39.createElement("a", { className: "nav-link text-dark", href: "#", onClick: logout }, "Logout");
+    return /* @__PURE__ */ React39.createElement("a", { href: "#", onClick: logout }, "Logout");
   };
   var defaultMenuItems = /* @__PURE__ */ React39.createElement(React39.Fragment, null, /* @__PURE__ */ React39.createElement(MenuItem, { type: "general", meta: {} }, /* @__PURE__ */ React39.createElement(
     ExtensionSlot,
