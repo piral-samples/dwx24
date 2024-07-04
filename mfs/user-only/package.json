@@ -1,6 +1,6 @@
 {
   "name": "user-only",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Micro frontend that is only loaded for users",
   "keywords": [
     "pilet"
@@ -11,12 +11,16 @@
       "spa-app"
     ]
   },
-  "dependencies": {},
+  "dependencies": {
+    "leaflet": "^1.9.3",
+    "react-leaflet": "^4"
+  },
   "devDependencies": {
     "@types/react": "^18",
+    "@types/react-leaflet": "^2",
     "react": "^18",
     "piral-cli": "1.5.6",
-    "piral-cli-esbuild": "latest",
+    "piral-cli-webpack5": "1.5.6",
     "typescript": "^5"
   },
   "scripts": {

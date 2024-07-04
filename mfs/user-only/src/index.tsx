@@ -1,3 +1,12 @@
-import { PiletApi } from 'spa-app';
+import './styles.scss';
+import { lazy } from 'react';
+import type { PiletApi } from 'spa-app';
 
-export function setup(api: PiletApi) {}
+const Map = lazy(() => import('./Map'));
+
+export function setup(api: PiletApi) {
+  api.registerTile(Map, {
+    initialRows: 4,
+    initialColumns: 4,
+  });
+}

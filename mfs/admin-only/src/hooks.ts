@@ -29,6 +29,10 @@ export function useMachineData(): Array<MachineData> {
     // open web socket connection
     const ws = new WebSocket('wss://smapiot-case-study-machine-backend.azurewebsites.net/api/v1/events');
 
+    ws.onopen = function () {
+      ws.send(JSON.stringify({ type: 'init' }));
+    };
+
     ws.onmessage = function (e) {
       const event = e.data as MachineEvent;
 
