@@ -2,7 +2,7 @@
   "name": "spa-app",
   "description": "The SPA app shell.",
   "version": "0.1.0",
-  "timestamp": "2024-07-04T16:24:32.819Z",
+  "timestamp": "2024-07-08T16:03:39.259Z",
   "scaffolding": {
     "pilets": {
       "files": [],
@@ -16,7 +16,7 @@
       "postUpgrade": "",
       "packageOverrides": {}
     },
-    "cli": "1.5.6"
+    "cli": "1.6.0"
   },
   "files": {
     "typings": "index.d.ts",
@@ -57,14 +57,14 @@
       "@types/react-router": "^5",
       "@types/react-router-dom": "^5",
       "esbuild-copy-static-files": "0.1.0",
-      "piral-cli": "1.5.6",
+      "piral-cli": "1.6.0",
       "piral-cli-esbuild": "latest",
       "typescript": "latest",
       "core-js": "3.37.1",
-      "piral": "1.5.6",
-      "piral-base": "1.5.6",
-      "piral-core": "1.5.6",
-      "piral-update": "1.5.6",
+      "piral": "1.6.0",
+      "piral-base": "1.6.0",
+      "piral-core": "1.6.0",
+      "piral-update": "1.6.0",
       "react": "18.3.1",
       "react-dom": "18.3.1",
       "react-router": "5.3.4",

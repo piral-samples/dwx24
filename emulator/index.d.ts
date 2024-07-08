@@ -169,6 +169,7 @@ export interface PiralEventMap extends PiralCustomEventMap {
   "unload-pilet": PiralUnloadPiletEvent;
   [custom: string]: any;
   "store-data": PiralStoreDataEvent;
+  "unhandled-error": PiralUnhandledErrorEvent;
 }
 
 export interface PiletLocaleApi {
@@ -427,6 +428,28 @@ export interface PiralStoreDataEvent<TValue = any> {
   expires: number;
 }
 
+/**
+ * Gets fired when an unhandled error in a component has been prevented.
+ */
+export interface PiralUnhandledErrorEvent {
+  /**
+   * The container showing the error / containing the component.
+   */
+  container: any;
+  /**
+   * The type of the error, i.e., the type of component that crashed.
+   */
+  errorType: string;
+  /**
+   * The actual error that was emitted.
+   */
+  error: Error;
+  /**
+   * The name of the pilet containing the problematic component.
+   */
+  pilet: string;
+}
+
 export type AnyLocalizationMessages = LocalizationMessages | NestedLocalizationMessages;
 
 export interface LocalizationMessages {
@@ -607,7 +630,7 @@ export interface BaseExtensionSlotProps<TName, TParams> {
    * Defines what should be rendered when no components are available
    * for the specified extension.
    */
-  empty?(): React.ReactNode;
+  empty?(props: TParams): React.ReactNode;
   /**
    * Determines if the `render` function should be called in case no
    * components are available for the specified extension.

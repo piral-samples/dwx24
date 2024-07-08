@@ -10892,7 +10892,7 @@
             startText = getText();
             return true;
           }
-          function reset() {
+          function reset2() {
             root2 = null;
             startText = null;
             fallbackText = null;
@@ -11414,7 +11414,7 @@
             if (isComposing) {
               if (domEventName === "compositionend" || !canUseCompositionEvent && isFallbackCompositionEnd(domEventName, nativeEvent)) {
                 var chars = getData();
-                reset();
+                reset2();
                 isComposing = false;
                 return chars;
               }
@@ -26633,7 +26633,7 @@
             return getPublicRootInstance(root3);
           }
           var didWarnAboutFindDOMNode = false;
-          function findDOMNode(componentOrElement) {
+          function findDOMNode2(componentOrElement) {
             {
               if (!didWarnAboutFindDOMNode) {
                 didWarnAboutFindDOMNode = true;
@@ -26817,7 +26817,7 @@
           exports.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = Internals;
           exports.createPortal = createPortal$1;
           exports.createRoot = createRoot$1;
-          exports.findDOMNode = findDOMNode;
+          exports.findDOMNode = findDOMNode2;
           exports.flushSync = flushSync$1;
           exports.hydrate = hydrate;
           exports.hydrateRoot = hydrateRoot$1;
@@ -26865,10 +26865,10 @@
             i.usingClientEntryPoint = false;
           }
         };
-        exports.hydrateRoot = function(c, h, o) {
+        exports.hydrateRoot = function(c, h2, o) {
           i.usingClientEntryPoint = true;
           try {
-            return m.hydrateRoot(c, h, o);
+            return m.hydrateRoot(c, h2, o);
           } finally {
             i.usingClientEntryPoint = false;
           }
@@ -32662,17 +32662,17 @@
     return events;
   }
 
-  // node_modules/piral-core/esm/components/components.js
+  // node_modules/piral-core/lib/components/components.js
   var React2 = __toESM(require_react());
 
-  // node_modules/piral-core/esm/hooks/globalState.js
+  // node_modules/piral-core/lib/hooks/globalState.js
   var import_react = __toESM(require_react());
 
-  // node_modules/piral-core/esm/state/stateContext.js
+  // node_modules/piral-core/lib/state/stateContext.js
   var React = __toESM(require_react());
   var StateContext = React.createContext(void 0);
 
-  // node_modules/piral-core/esm/hooks/globalState.js
+  // node_modules/piral-core/lib/hooks/globalState.js
   function useGlobalStateContext() {
     return (0, import_react.useContext)(StateContext);
   }
@@ -32681,23 +32681,23 @@
     return useState4(select);
   }
 
-  // node_modules/piral-core/esm/hooks/action.js
+  // node_modules/piral-core/lib/hooks/action.js
   function useAction(action) {
     const ctx = useGlobalStateContext();
     return ctx[action];
   }
 
-  // node_modules/piral-core/esm/hooks/actions.js
+  // node_modules/piral-core/lib/hooks/actions.js
   var import_react2 = __toESM(require_react());
   function useActions() {
     const { state, ...actions } = (0, import_react2.useContext)(StateContext);
     return actions;
   }
 
-  // node_modules/piral-core/esm/hooks/media.js
+  // node_modules/piral-core/lib/hooks/media.js
   var import_react3 = __toESM(require_react());
 
-  // node_modules/piral-core/esm/utils/helpers.js
+  // node_modules/piral-core/lib/utils/helpers.js
   var removeIndicator = null;
   var none = [];
   var noop = () => {
@@ -32764,7 +32764,7 @@
     }
   }
 
-  // node_modules/piral-core/esm/utils/media.js
+  // node_modules/piral-core/lib/utils/media.js
   var defaultLayouts = ["desktop", "tablet", "mobile"];
   var defaultBreakpoints = ["(min-width: 991px)", "(min-width: 481px)", "(max-width: 480px)"];
   var mm = typeof window === "undefined" || !isfunc(window.matchMedia) ? () => ({ matches: void 0 }) : (q) => window.matchMedia(q);
@@ -32774,7 +32774,7 @@
     return layout2 !== void 0 ? layout2 : defaultLayout;
   }
 
-  // node_modules/piral-core/esm/hooks/media.js
+  // node_modules/piral-core/lib/hooks/media.js
   function useMedia(queries, values, defaultValue) {
     const match = () => getCurrentLayout(queries, values, defaultValue);
     const [value, update] = (0, import_react3.useState)(match);
@@ -32788,7 +32788,7 @@
     return value;
   }
 
-  // node_modules/piral-core/esm/components/components.js
+  // node_modules/piral-core/lib/components/components.js
   function getPiralComponent(name) {
     return (props) => {
       const Component3 = useGlobalState((s) => s.components[name]);
@@ -32802,39 +32802,11 @@
   var RegisteredLayout = getPiralComponent("Layout");
   var RegisteredDebug = getPiralComponent("Debug");
 
-  // node_modules/piral-core/esm/components/ErrorBoundary.js
-  var React3 = __toESM(require_react());
-  var ErrorBoundary = class extends React3.Component {
-    constructor() {
-      super(...arguments);
-      this.state = {
-        error: void 0
-      };
-    }
-    componentDidCatch(error) {
-      const { piral, errorType } = this.props;
-      const pilet = piral.meta.name;
-      console.error(`[${pilet}] Exception in component of type "${errorType}".`, error);
-      this.setState({
-        error
-      });
-    }
-    render() {
-      const { children, piral, errorType, ...renderProps } = this.props;
-      const { error } = this.state;
-      const rest = renderProps;
-      if (error) {
-        const pilet = piral.meta.name;
-        return React3.createElement(RegisteredErrorInfo, { type: errorType, error, pilet, ...rest });
-      }
-      return React3.createElement(React3.Suspense, { fallback: React3.createElement(RegisteredLoadingIndicator, null) }, children);
-    }
-  };
+  // node_modules/piral-core/lib/components/ErrorBoundary.js
+  var React5 = __toESM(require_react());
+  var import_react_dom2 = __toESM(require_react_dom());
 
-  // node_modules/piral-core/esm/components/ExtensionSlot.js
-  var React6 = __toESM(require_react());
-
-  // node_modules/piral-core/esm/utils/compare.js
+  // node_modules/piral-core/lib/utils/compare.js
   function compareObjects(a, b) {
     for (const i in a) {
       if (!(i in b)) {
@@ -32876,7 +32848,7 @@
     return true;
   }
 
-  // node_modules/piral-core/esm/utils/data.js
+  // node_modules/piral-core/lib/utils/data.js
   var defaultTarget = "memory";
   function createDataOptions(options = defaultTarget) {
     if (typeof options === "string") {
@@ -32900,32 +32872,32 @@
     return -1;
   }
 
-  // node_modules/piral-core/esm/utils/extension.js
-  var React4 = __toESM(require_react());
+  // node_modules/piral-core/lib/utils/extension.js
+  var React3 = __toESM(require_react());
   function removeAll(nodes) {
     nodes.forEach((node) => node.remove());
   }
   var SlotCarrier = ({ nodes }) => {
-    const host = React4.useRef();
-    React4.useEffect(() => {
+    const host = React3.useRef();
+    React3.useEffect(() => {
       host.current?.append(...nodes);
       return () => removeAll(nodes);
     }, [nodes]);
     if (nodes.length) {
-      return React4.createElement("piral-slot", { ref: host });
+      return React3.createElement("piral-slot", { ref: host });
     }
     return null;
   };
   function toExtension(Component3) {
-    return (props) => React4.createElement(Component3, { ...props.params });
+    return (props) => React3.createElement(Component3, { ...props.params });
   }
   function reactifyContent(childNodes) {
     const nodes = Array.prototype.filter.call(childNodes, Boolean);
     removeAll(nodes);
-    return React4.createElement(SlotCarrier, { nodes });
+    return React3.createElement(SlotCarrier, { nodes });
   }
 
-  // node_modules/piral-core/esm/utils/foreign.js
+  // node_modules/piral-core/lib/utils/foreign.js
   var import_react4 = __toESM(require_react());
   var import_react_dom = __toESM(require_react_dom());
   var extensionName = "piral-extension";
@@ -32961,8 +32933,11 @@
     }
     return attachDomPortal("root", context2, element, component, props);
   }
+  function defer(cb) {
+    setTimeout(cb, 0);
+  }
 
-  // node_modules/piral-core/esm/utils/guid.js
+  // node_modules/piral-core/lib/utils/guid.js
   function rand(c) {
     const r = Math.random() * 16 | 0;
     const v = c === "x" ? r : r & 3 | 8;
@@ -32975,19 +32950,19 @@
     return `${prefix2}://${name}`;
   }
 
-  // node_modules/piral-core/esm/utils/react.js
-  var React5 = __toESM(require_react());
+  // node_modules/piral-core/lib/utils/react.js
+  var React4 = __toESM(require_react());
   function defaultRender(children, key) {
-    return React5.createElement(React5.Fragment, { key }, children);
+    return React4.createElement(React4.Fragment, { key }, children);
   }
 
-  // node_modules/piral-core/esm/utils/routes.js
+  // node_modules/piral-core/lib/utils/routes.js
   var import_path_to_regexp = __toESM(require_path_to_regexp());
   function createRouteMatcher(path) {
     return (0, import_path_to_regexp.default)(path);
   }
 
-  // node_modules/piral-core/esm/utils/state.js
+  // node_modules/piral-core/lib/utils/state.js
   var import_react5 = __toESM(require_react());
   function withAll(...dispatchers) {
     return (state) => {
@@ -33055,7 +33030,52 @@
     });
   }
 
-  // node_modules/piral-core/esm/components/ExtensionSlot.js
+  // node_modules/piral-core/lib/components/ErrorBoundary.js
+  var ErrorBoundary = class extends React5.Component {
+    constructor() {
+      super(...arguments);
+      this.state = {
+        error: void 0
+      };
+    }
+    componentDidCatch(error) {
+      const { piral, errorType } = this.props;
+      const pilet = piral.meta.name;
+      console.error(`[${pilet}] Exception in component of type "${errorType}".`, error);
+      this.setState({
+        error
+      });
+    }
+    componentDidUpdate(_, prevState) {
+      const { error } = this.state;
+      if (error && !prevState.error) {
+        const { piral, errorType } = this.props;
+        const pilet = piral.meta.name;
+        defer(() => {
+          const container = (0, import_react_dom2.findDOMNode)(this);
+          piral.emit("unhandled-error", {
+            container,
+            errorType,
+            error,
+            pilet
+          });
+        });
+      }
+    }
+    render() {
+      const { children, piral, errorType, ...renderProps } = this.props;
+      const { error } = this.state;
+      const rest = renderProps;
+      if (error) {
+        const pilet = piral.meta.name;
+        return React5.createElement(RegisteredErrorInfo, { type: errorType, error, pilet, ...rest });
+      }
+      return React5.createElement(React5.Suspense, { fallback: React5.createElement(RegisteredLoadingIndicator, null) }, children);
+    }
+  };
+
+  // node_modules/piral-core/lib/components/ExtensionSlot.js
+  var React6 = __toESM(require_react());
   function defaultOrder(extensions) {
     return extensions;
   }
@@ -33063,7 +33083,7 @@
     const { name, render = defaultRender, empty, params, children, emptySkipsRender = false, order = defaultOrder } = props;
     const extensions = useGlobalState((s) => s.registry.extensions[name] || none);
     const isEmpty = extensions.length === 0 && isfunc(empty);
-    const content = isEmpty ? [defaultRender(empty(), "empty")] : order(extensions).map(({ component: Component3, reference, defaults = {} }, i) => React6.createElement(Component3, { key: `${reference?.displayName || "_"}${i}`, children, params: {
+    const content = isEmpty ? [defaultRender(empty(params), "empty")] : order(extensions).map(({ component: Component3, reference, defaults = {} }, i) => React6.createElement(Component3, { key: `${reference?.displayName || "_"}${i}`, children, params: {
       ...defaults,
       ...params
     } }));
@@ -33074,7 +33094,7 @@
   }
   ExtensionSlot.displayName = `ExtensionSlot`;
 
-  // node_modules/piral-core/esm/components/Mediator.js
+  // node_modules/piral-core/lib/components/Mediator.js
   var React7 = __toESM(require_react());
   var Mediator = ({ options }) => {
     const { initialize: initialize2, readState: readState2 } = useGlobalStateContext();
@@ -33092,16 +33112,16 @@
     return null;
   };
 
-  // node_modules/piral-core/esm/components/PiralGlobals.js
+  // node_modules/piral-core/lib/components/PiralGlobals.js
   var React8 = __toESM(require_react());
 
-  // node_modules/piral-core/esm/components/PortalRenderer.js
+  // node_modules/piral-core/lib/components/PortalRenderer.js
   var PortalRenderer = ({ id }) => {
     const children = useGlobalState((m) => m.portals[id]) || none;
     return defaultRender(children);
   };
 
-  // node_modules/piral-core/esm/components/PiralGlobals.js
+  // node_modules/piral-core/lib/components/PiralGlobals.js
   var PiralGlobals = () => {
     return React8.createElement(
       React8.Fragment,
@@ -33111,7 +33131,7 @@
     );
   };
 
-  // node_modules/piral-core/esm/components/PiralRoutes.js
+  // node_modules/piral-core/lib/components/PiralRoutes.js
   var React18 = __toESM(require_react());
 
   // node_modules/piral-core/app.codegen
@@ -34057,8 +34077,8 @@
         handlers.push(handler);
       },
       off: function off(handler) {
-        handlers = handlers.filter(function(h) {
-          return h !== handler;
+        handlers = handlers.filter(function(h2) {
+          return h2 !== handler;
         });
       },
       get: function get() {
@@ -34976,10 +34996,10 @@
   }
   var ariaCurrentType;
 
-  // node_modules/piral-core/esm/defaults/DefaultErrorInfo.js
+  // node_modules/piral-core/lib/defaults/DefaultErrorInfo.js
   var React12 = __toESM(require_react());
 
-  // node_modules/piral-core/esm/components/SwitchErrorInfo.js
+  // node_modules/piral-core/lib/components/SwitchErrorInfo.js
   var React11 = __toESM(require_react());
   function renderComponent(components, props) {
     const name = props.type;
@@ -35001,27 +35021,27 @@
     return renderComponent(components, props);
   };
 
-  // node_modules/piral-core/esm/defaults/DefaultErrorInfo.js
+  // node_modules/piral-core/lib/defaults/DefaultErrorInfo.js
   var DefaultErrorInfo = (props) => React12.createElement(ExtensionSlot, { name: "error", params: props, empty: () => React12.createElement(SwitchErrorInfo, { ...props }) });
   DefaultErrorInfo.displayName = "DefaultErrorInfo";
 
-  // node_modules/piral-core/esm/defaults/DefaultLoadingIndicator.js
+  // node_modules/piral-core/lib/defaults/DefaultLoadingIndicator.js
   var React13 = __toESM(require_react());
   var DefaultLoadingIndicator = () => React13.createElement("div", null, "Loading");
   DefaultLoadingIndicator.displayName = "DefaultLoadingIndicator";
 
-  // node_modules/piral-core/esm/defaults/DefaultLayout.js
+  // node_modules/piral-core/lib/defaults/DefaultLayout.js
   var DefaultLayout = ({ children }) => defaultRender(children);
   DefaultLayout.displayName = "DefaultLayout";
 
-  // node_modules/piral-core/esm/defaults/DefaultRouter_v5.js
+  // node_modules/piral-core/lib/defaults/DefaultRouter_v5.js
   var React14 = __toESM(require_react());
   var DefaultRouter = ({ children, publicPath: publicPath2 }) => {
     return React14.createElement(BrowserRouter, { basename: publicPath2 }, children);
   };
   DefaultRouter.displayName = "DefaultRouter";
 
-  // node_modules/piral-core/esm/defaults/DefaultRouteSwitch_v5.js
+  // node_modules/piral-core/lib/defaults/DefaultRouteSwitch_v5.js
   var React15 = __toESM(require_react());
   var DefaultRouteSwitch = ({ paths, NotFound: NotFound2, ...props }) => {
     return React15.createElement(
@@ -35033,7 +35053,7 @@
   };
   DefaultRouteSwitch.displayName = "DefaultRouteSwitch";
 
-  // node_modules/piral-core/esm/defaults/navigator_v5.js
+  // node_modules/piral-core/lib/defaults/navigator_v5.js
   var React16 = __toESM(require_react());
   var _nav;
   var _noop = () => {
@@ -35116,7 +35136,7 @@
     };
   }
 
-  // node_modules/piral-debug-utils/esm/ExtensionCatalogue.js
+  // node_modules/piral-debug-utils/lib/ExtensionCatalogue.js
   var React17 = __toESM(require_react());
   var ExtensionCatalogue = () => {
     const { state } = useLocation();
@@ -35127,7 +35147,7 @@
     return null;
   };
 
-  // node_modules/piral-debug-utils/esm/decycle.js
+  // node_modules/piral-debug-utils/lib/decycle.js
   function decycle(obj) {
     const objects = [];
     const paths = [];
@@ -35174,7 +35194,234 @@
     return derez(obj, "$");
   }
 
-  // node_modules/piral-debug-utils/esm/visualizer.js
+  // node_modules/piral-debug-utils/lib/overlay.js
+  function h(e, attrs = {}, ...children) {
+    const elem = document.createElement(e);
+    for (const [k, v] of Object.entries(attrs)) {
+      elem.setAttribute(k, v);
+    }
+    elem.append(...children);
+    return elem;
+  }
+  var templateStyle = (
+    /*css*/
+    `
+:host {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99999;
+  --monospace: 'SFMono-Regular', Consolas,
+  'Liberation Mono', Menlo, Courier, monospace;
+  --red: #ff5555;
+  --yellow: #e2aa53;
+  --purple: #cfa4ff;
+  --cyan: #2dd9da;
+  --dim: #c9c9c9;
+
+  --window-background: #181818;
+  --window-color: #d8d8d8;
+}
+
+.backdrop {
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  margin: 0;
+  background: rgba(0, 0, 0, 0.66);
+}
+
+.window {
+  font-family: var(--monospace);
+  line-height: 1.5;
+  max-width: 80vw;
+  color: var(--window-color);
+  box-sizing: border-box;
+  margin: 30px auto;
+  padding: 2.5vh 4vw;
+  position: relative;
+  background: var(--window-background);
+  border-radius: 6px 6px 8px 8px;
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+  overflow: hidden;
+  border-top: 8px solid var(--red);
+  direction: ltr;
+  text-align: left;
+}
+
+pre {
+  font-family: var(--monospace);
+  font-size: 16px;
+  margin-top: 0;
+  margin-bottom: 1em;
+  overflow-x: scroll;
+  scrollbar-width: none;
+}
+
+pre::-webkit-scrollbar {
+  display: none;
+}
+
+pre.frame::-webkit-scrollbar {
+  display: block;
+  height: 5px;
+}
+
+pre.frame::-webkit-scrollbar-thumb {
+  background: #999;
+  border-radius: 5px;
+}
+
+pre.frame {
+  scrollbar-width: thin;
+}
+
+.message {
+  line-height: 1.3;
+  font-weight: 600;
+  white-space: pre-wrap;
+}
+
+.message-body {
+  color: var(--red);
+}
+
+.plugin {
+  color: var(--purple);
+}
+
+.file {
+  color: var(--cyan);
+  margin-bottom: 0;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.frame {
+  color: var(--yellow);
+}
+
+.stack {
+  font-size: 13px;
+  color: var(--dim);
+}
+
+.tip {
+  font-size: 13px;
+  color: #999;
+  border-top: 1px dotted #999;
+  padding-top: 13px;
+  line-height: 1.8;
+}
+
+code {
+  font-size: 13px;
+  font-family: var(--monospace);
+  color: var(--yellow);
+}
+
+.file-link {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+kbd {
+  line-height: 1.5;
+  font-family: ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background-color: rgb(38, 40, 44);
+  color: rgb(166, 167, 171);
+  padding: 0.15rem 0.3rem;
+  border-radius: 0.25rem;
+  border-width: 0.0625rem 0.0625rem 0.1875rem;
+  border-style: solid;
+  border-color: rgb(54, 57, 64);
+  border-image: initial;
+}
+`
+  );
+  var createTemplate = () => h("div", { class: "backdrop", part: "backdrop" }, h("div", { class: "window", part: "window" }, h("pre", { class: "message", part: "message" }, h("span", { class: "plugin", part: "plugin" }), h("span", { class: "message-body", part: "message-body" })), h("pre", { class: "file", part: "file" }), h("pre", { class: "frame", part: "frame" }), h("pre", { class: "stack", part: "stack" }), h("div", { class: "tip", part: "tip" }, "Click outside, press ", h("kbd", {}, "Esc"), " key, or fix the code to dismiss.", h("br"), "You can also disable this overlay by setting ", h("code", { part: "config-option-name" }, "dbg:error-overlay"), " to ", h("code", { part: "config-option-value" }, '"off"'), " in ", h("code", { part: "config-file-name" }, "sessionStorage"), ".")), h("style", {}, templateStyle));
+  var fileRE = /(?:[a-zA-Z]:\\|\/).*?:\d+:\d+/g;
+  var codeframeRE = /^(?:>?\s*\d+\s+\|.*|\s+\|\s*\^.*)\r?\n/gm;
+  var overlayId = "piral-error-overlay";
+  if (typeof window !== "undefined" && "customElements" in window) {
+    class ErrorOverlay extends HTMLElement {
+      constructor(props, links = true) {
+        super();
+        const { error, pilet, errorType } = props;
+        this.root = this.attachShadow({ mode: "open" });
+        this.root.appendChild(createTemplate());
+        codeframeRE.lastIndex = 0;
+        const hasFrame = error.frame && codeframeRE.test(error.frame);
+        const message = hasFrame ? error.message.replace(codeframeRE, "") : error.message;
+        if (pilet) {
+          this.text(".plugin", `[${pilet}] `);
+        }
+        this.text(".message-body", message.trim());
+        const [file] = (error.loc?.file || error.id || "unknown file").split(`?`);
+        if (error.loc) {
+          this.text(".file", `${file}:${error.loc.line}:${error.loc.column}`, links);
+        } else if (error.id) {
+          this.text(".file", file);
+        }
+        if (hasFrame) {
+          this.text(".frame", error.frame.trim());
+        }
+        this.text(".stack", error.stack, links);
+        this.root.querySelector(".window").addEventListener("click", (e) => {
+          e.stopPropagation();
+        });
+        this.addEventListener("click", () => {
+          this.close();
+        });
+        this.closeOnEsc = (e) => {
+          if (e.key === "Escape" || e.code === "Escape") {
+            this.close();
+          }
+        };
+        document.addEventListener("keydown", this.closeOnEsc);
+      }
+      text(selector, text, linkFiles = false) {
+        const el = this.root.querySelector(selector);
+        if (linkFiles) {
+          let curIndex = 0;
+          let match;
+          fileRE.lastIndex = 0;
+          while (match = fileRE.exec(text)) {
+            const { 0: file, index } = match;
+            if (index != null) {
+              const frag = text.slice(curIndex, index);
+              el.appendChild(document.createTextNode(frag));
+              const link = document.createElement("a");
+              link.textContent = file;
+              link.className = "file-link";
+              link.onclick = () => {
+                console.log("Clicked");
+              };
+              el.appendChild(link);
+              curIndex += frag.length + file.length;
+            }
+          }
+        } else {
+          el.textContent = text;
+        }
+      }
+      close() {
+        this.parentNode?.removeChild(this);
+        document.removeEventListener("keydown", this.closeOnEsc);
+      }
+    }
+    customElements.define(overlayId, ErrorOverlay);
+  }
+
+  // node_modules/piral-debug-utils/lib/visualizer.js
   var visualizerName = "piral-inspector-visualizer";
   var persistAttribute = "persist";
   var piletColorMap = {};
@@ -35317,7 +35564,7 @@
     }
   }
 
-  // node_modules/piral-debug-utils/esm/state.js
+  // node_modules/piral-debug-utils/lib/state.js
   var settingsKeys = {
     viewState: "dbg:view-state",
     loadPilets: "dbg:load-pilets",
@@ -35325,7 +35572,8 @@
     viewOrigins: "dbg:view-origins",
     extensionCatalogue: "dbg:extension-catalogue",
     clearConsole: "dbg:clear-console",
-    persistSettings: "dbg:persist-settings-data"
+    persistSettings: "dbg:persist-settings-data",
+    errorOverlay: "dbg:error-overlay"
   };
   var persistKey = settingsKeys.persistSettings;
   var persistSettings = !!localStorage.getItem(persistKey);
@@ -35387,12 +35635,13 @@
       viewOrigins: getValue(settingsKeys.viewOrigins, defaultValues.viewOrigins, false),
       extensionCatalogue: getValue(settingsKeys.extensionCatalogue, defaultValues.extensionCatalogue, true),
       clearConsole: getValue(settingsKeys.clearConsole, defaultValues.clearConsole, false),
+      errorOverlay: getValue(settingsKeys.errorOverlay, defaultValues.errorOverlay, true),
       persistSettings,
       cataloguePath: "/$debug-extension-catalogue"
     };
   }
 
-  // node_modules/piral-debug-utils/esm/debug.js
+  // node_modules/piral-debug-utils/lib/debug.js
   function installPiralDebug(options) {
     const { getGlobalState, getExtensions, getDependencies, getRoutes, getPilets, fireEvent, integrate, removePilet: removePilet2, updatePilet, addPilet: addPilet2, navigate, emulator = true, customSettings = {}, defaultSettings = {} } = options;
     const events = [];
@@ -35443,6 +35692,15 @@
           if (prev !== value) {
             updateVisualize(value);
           }
+        }
+      },
+      errorOverlay: {
+        value: initialSettings.errorOverlay,
+        type: "boolean",
+        label: "Show error overlay",
+        group: "extensions",
+        onChange(value) {
+          setValue(settingsKeys.errorOverlay, value ? "on" : "off");
         }
       },
       extensionCatalogue: {
@@ -35583,8 +35841,8 @@
         dependencies: "tslib,react,react-dom,react-router,react-router-dom"
       },
       build: {
-        date: "2024-07-04T16:24:32.495Z",
-        cli: "1.5.6",
+        date: "2024-07-08T16:03:38.925Z",
+        cli: "1.6.0",
         compat: "1"
       }
     };
@@ -35673,12 +35931,18 @@
     };
     document.body.dispatchEvent = function(ev) {
       if (ev.type.startsWith("piral-")) {
+        const name = ev.type.replace("piral-", "");
+        const args = ev.detail.arg;
         events.unshift({
           id: events.length.toString(),
-          name: ev.type.replace("piral-", ""),
-          args: decycle(ev.detail.arg),
+          name,
+          args: decycle(args),
           time: Date.now()
         });
+        if (name === "unhandled-error" && args.errorType && typeof customElements !== "undefined" && sessionStorage.getItem(settingsKeys.errorOverlay) !== "off") {
+          const ErrorOverlay = customElements.get(overlayId);
+          document.body.appendChild(new ErrorOverlay(args));
+        }
         sendMessage({
           events,
           type: "events"
@@ -35694,7 +35958,8 @@
           hardRefresh: sessionStorage.getItem(settingsKeys.hardRefresh) === "on",
           viewOrigins: sessionStorage.getItem(settingsKeys.viewOrigins) === "on",
           extensionCatalogue: sessionStorage.getItem(settingsKeys.extensionCatalogue) !== "off",
-          clearConsole: sessionStorage.getItem(settingsKeys.clearConsole) === "on"
+          clearConsole: sessionStorage.getItem(settingsKeys.clearConsole) === "on",
+          errorOverlay: sessionStorage.getItem(settingsKeys.errorOverlay) !== "off"
         });
       }
     });
@@ -35786,7 +36051,7 @@
     start();
   }
 
-  // node_modules/piral-debug-utils/esm/routeRefresh.js
+  // node_modules/piral-debug-utils/lib/routeRefresh.js
   var debugRouteCache = {
     active: 0,
     paths: [],
@@ -35802,7 +36067,7 @@
     };
   }
 
-  // node_modules/piral-debug-utils/esm/emulator.js
+  // node_modules/piral-debug-utils/lib/emulator.js
   function installPiletEmulator(requestPilets, options) {
     const { addPilet: addPilet2, removePilet: removePilet2, integrate, defaultFeedUrl = "https://feed.piral.cloud/api/v1/pilet/emulator-website" } = options;
     integrate(() => {
@@ -35849,7 +36114,7 @@
     });
   }
 
-  // node_modules/piral-debug-utils/esm/useDebugRouteFilter.js
+  // node_modules/piral-debug-utils/lib/useDebugRouteFilter.js
   var import_react8 = __toESM(require_react());
   function useDebugRouteFilter(paths) {
     const [_, triggerChange] = (0, import_react8.useState)(0);
@@ -35865,7 +36130,7 @@
     return debugRouteCache.paths;
   }
 
-  // node_modules/piral-core/esm/tools/debugger.js
+  // node_modules/piral-core/lib/tools/debugger.js
   function integrateDebugger(context2, options, debug = {}) {
     installPiralDebug({
       emulator: debug.emulator,
@@ -35925,7 +36190,7 @@
     });
   }
 
-  // node_modules/piral-core/esm/tools/emulator.js
+  // node_modules/piral-core/lib/tools/emulator.js
   function integrateEmulator(context2, options, debug = {}) {
     installPiletEmulator(options.fetchPilets, {
       defaultFeedUrl: debug.defaultFeedUrl,
@@ -35990,7 +36255,7 @@
     return useDebugRouteFilter(paths);
   }
 
-  // node_modules/piral-core/esm/components/PiralRoutes.js
+  // node_modules/piral-core/lib/components/PiralRoutes.js
   function useShellRoutes() {
     const routes = useGlobalState((s) => s.routes);
     return React18.useMemo(() => Object.entries(routes).map(([path, Component3]) => ({
@@ -36020,17 +36285,17 @@
   };
   PiralRoutes.displayName = "Routes";
 
-  // node_modules/piral-core/esm/components/PiralSuspense.js
+  // node_modules/piral-core/lib/components/PiralSuspense.js
   var React19 = __toESM(require_react());
   var PiralSuspense = ({ children }) => {
     const { error, loading } = useGlobalState((m) => m.app);
     return error ? React19.createElement(RegisteredErrorInfo, { type: "loading", error }) : loading ? React19.createElement(RegisteredLoadingIndicator, null) : React19.createElement(React19.Fragment, null, children);
   };
 
-  // node_modules/piral-core/esm/components/PiralView.js
+  // node_modules/piral-core/lib/components/PiralView.js
   var React21 = __toESM(require_react());
 
-  // node_modules/piral-core/esm/components/ResponsiveLayout.js
+  // node_modules/piral-core/lib/components/ResponsiveLayout.js
   var React20 = __toESM(require_react());
   var ResponsiveLayout = ({ breakpoints = defaultBreakpoints, Layout, children }) => {
     const selected = useMedia(breakpoints, defaultLayouts, "desktop");
@@ -36038,7 +36303,7 @@
   };
   ResponsiveLayout.displayName = "ResponsiveLayout";
 
-  // node_modules/piral-core/esm/components/PiralView.js
+  // node_modules/piral-core/lib/components/PiralView.js
   var NotFound = (props) => React21.createElement(RegisteredErrorInfo, { type: "not_found", ...props });
   var PiralView = ({ breakpoints, children }) => React21.createElement(
     React21.Fragment,
@@ -36057,10 +36322,10 @@
   );
   PiralView.displayName = "PiralView";
 
-  // node_modules/piral-core/esm/components/wrapComponent.js
+  // node_modules/piral-core/lib/components/wrapComponent.js
   var React23 = __toESM(require_react());
 
-  // node_modules/piral-core/esm/components/ForeignComponentContainer.js
+  // node_modules/piral-core/lib/components/ForeignComponentContainer.js
   var React22 = __toESM(require_react());
   var ForeignComponentContainer = class extends React22.Component {
     constructor() {
@@ -36105,7 +36370,7 @@
     }
   };
 
-  // node_modules/piral-core/esm/components/wrapComponent.js
+  // node_modules/piral-core/lib/components/wrapComponent.js
   var portalIdBase = 123456;
   function wrapReactComponent(Component3, captured, Wrapper) {
     return (props) => React23.createElement(
@@ -36145,7 +36410,7 @@
     return wrapReactComponent(component, captured, Wrapper);
   }
 
-  // node_modules/piral-core/esm/modules/element.js
+  // node_modules/piral-core/lib/modules/element.js
   if (typeof window !== "undefined" && "customElements" in window) {
     const contents = "contents";
     class PiralExtension extends HTMLElement {
@@ -36310,7 +36575,7 @@
         const ev = new CustomEvent(eventName, {
           detail: { name: this.name, origin: this.origin }
         });
-        setTimeout(() => window.dispatchEvent(ev), 0);
+        defer(() => window.dispatchEvent(ev));
       }
     }
     customElements.define(componentName, PiralComponent);
@@ -36333,7 +36598,7 @@
     return [noop, noop];
   }
 
-  // node_modules/piral-core/esm/actions/index.js
+  // node_modules/piral-core/lib/actions/index.js
   var actions_exports = {};
   __export(actions_exports, {
     addPilet: () => addPilet,
@@ -36363,7 +36628,7 @@
     writeDataItem: () => writeDataItem
   });
 
-  // node_modules/piral-core/esm/actions/app.js
+  // node_modules/piral-core/lib/actions/app.js
   function initialize(ctx, loading, error, modules) {
     ctx.dispatch((state) => ({
       ...state,
@@ -36419,7 +36684,7 @@
     ctx.dispatch(withProvider(provider));
   }
 
-  // node_modules/piral-core/esm/actions/components.js
+  // node_modules/piral-core/lib/actions/components.js
   function registerPage(ctx, name, value) {
     ctx.dispatch(withPage(name, value));
   }
@@ -36433,7 +36698,7 @@
     ctx.dispatch(withoutExtension(name, reference));
   }
 
-  // node_modules/piral-core/esm/actions/data.js
+  // node_modules/piral-core/lib/actions/data.js
   function resetData(ctx) {
     ctx.dispatch((state) => ({
       ...state,
@@ -36477,7 +36742,7 @@
     return true;
   }
 
-  // node_modules/piral-core/esm/actions/define.js
+  // node_modules/piral-core/lib/actions/define.js
   function defineAction(ctx, actionName, action) {
     ctx[actionName] = action.bind(ctx, ctx);
   }
@@ -36488,7 +36753,7 @@
     }
   }
 
-  // node_modules/piral-core/esm/actions/portal.js
+  // node_modules/piral-core/lib/actions/portal.js
   function destroyPortal(ctx, id) {
     ctx.dispatch((state) => ({
       ...state,
@@ -36514,7 +36779,7 @@
     }));
   }
 
-  // node_modules/piral-core/esm/actions/state.js
+  // node_modules/piral-core/lib/actions/state.js
   function dispatch(ctx, update) {
     const oldState = ctx.state.getState();
     const newState = update(oldState);
@@ -36526,7 +36791,7 @@
     return read(ctx.state.getState());
   }
 
-  // node_modules/piral-core/esm/state/createActions.js
+  // node_modules/piral-core/lib/state/createActions.js
   function createContext3(state, events) {
     const ctx = {
       ...events,
@@ -36661,7 +36926,7 @@
     return useStore;
   }
 
-  // node_modules/piral-core/esm/state/createGlobalState.js
+  // node_modules/piral-core/lib/state/createGlobalState.js
   function extend(defaultState, customState) {
     for (const key of Object.keys(customState)) {
       if (key === "__proto__" || key === "constructor") {
@@ -36679,7 +36944,7 @@
     return create(() => extend(defaultState, customState));
   }
 
-  // node_modules/piral-core/esm/state/withApi.js
+  // node_modules/piral-core/lib/state/withApi.js
   var React24 = __toESM(require_react());
   var DefaultWrapper = (props) => defaultRender(props.children);
   function getWrapper(wrappers, wrapperType) {
@@ -36715,7 +36980,7 @@
     return wrapComponent(converters, component, outerProps, Wrapper);
   }
 
-  // node_modules/piral-core/esm/modules/core.js
+  // node_modules/piral-core/lib/modules/core.js
   function createCoreApi(context2) {
     return (api, meta) => {
       const pilet = meta.name;
@@ -36762,7 +37027,7 @@
     };
   }
 
-  // node_modules/piral-core/esm/modules/api.js
+  // node_modules/piral-core/lib/modules/api.js
   function createExtenders(context2, apis) {
     const creators = [createCoreApi, ...apis.filter(isfunc)];
     return creators.map((c) => {
@@ -36785,7 +37050,7 @@
     };
   }
 
-  // node_modules/piral-core/esm/modules/dependencies.js
+  // node_modules/piral-core/lib/modules/dependencies.js
   var globalDependencies = {};
   if (isfunc(fillDependencies)) {
     fillDependencies(globalDependencies);
@@ -36797,7 +37062,7 @@
     return Promise.resolve([]);
   }
 
-  // node_modules/piral-core/esm/helpers.js
+  // node_modules/piral-core/lib/helpers.js
   function createPiletOptions({ hooks, context: context2, loaders, loaderConfig, availablePilets, strategy, createApi, loadPilet, requestPilets, shareDependencies, debug }) {
     const options = {
       config: loaderConfig,
@@ -36814,7 +37079,7 @@
     return options;
   }
 
-  // node_modules/piral-core/esm/createInstance.js
+  // node_modules/piral-core/lib/createInstance.js
   function createInstance(config = {}) {
     const { id = generateId(), state, actions, availablePilets = [], plugins, requestPilets = defaultModuleRequester, loaderConfig, async = false, shareDependencies = defaultDependencySelector, loadPilet, loaders, debug, apiFactory = defaultApiFactory } = config;
     const globalState = createGlobalState(state);
@@ -36857,15 +37122,18 @@
     });
   }
 
-  // node_modules/piral-core/esm/Piral.js
+  // node_modules/piral-core/lib/Piral.js
   var React27 = __toESM(require_react());
 
-  // node_modules/piral-core/esm/PiralContext.js
+  // node_modules/piral-core/lib/PiralContext.js
   var React26 = __toESM(require_react());
 
-  // node_modules/piral-core/esm/RootListener.js
+  // node_modules/piral-core/lib/RootListener.js
   var React25 = __toESM(require_react());
-  var import_react_dom2 = __toESM(require_react_dom());
+  var import_react_dom3 = __toESM(require_react_dom());
+  var renderHtmlEvent = "render-html";
+  var renderContentEvent = "render-content";
+  var forwardEventEvent = "forward-event";
   var RootListener = () => {
     const context2 = useGlobalStateContext();
     React25.useLayoutEffect(() => {
@@ -36880,23 +37148,30 @@
         const renderContent = (ev) => {
           ev.stopPropagation();
           const { target, content, portalId } = ev.detail;
-          const portal = (0, import_react_dom2.createPortal)(content, target);
+          const portal = (0, import_react_dom3.createPortal)(content, target);
           const dispose = () => context2.hidePortal(portalId, portal);
           context2.showPortal(portalId, portal);
           target.dispose = dispose;
         };
-        document.body.addEventListener("render-html", renderHtml, false);
-        window.addEventListener("render-content", renderContent, false);
+        const forwardEvent = (ev) => {
+          ev.stopPropagation();
+          const { type, args } = ev.detail;
+          context2.emit(type, args);
+        };
+        document.body.addEventListener(renderHtmlEvent, renderHtml, false);
+        document.body.addEventListener(forwardEventEvent, forwardEvent, false);
+        window.addEventListener(renderContentEvent, renderContent, false);
         return () => {
-          document.body.removeEventListener("render-html", renderHtml, false);
-          window.removeEventListener("render-content", renderContent, false);
+          document.body.removeEventListener(renderHtmlEvent, renderHtml, false);
+          document.body.removeEventListener(forwardEventEvent, forwardEvent, false);
+          window.removeEventListener(renderContentEvent, renderContent, false);
         };
       }
     }, [context2]);
     return null;
   };
 
-  // node_modules/piral-core/esm/PiralContext.js
+  // node_modules/piral-core/lib/PiralContext.js
   var PiralProvider = ({ children }) => {
     const Provider = useGlobalState((m) => m.provider || React26.Fragment);
     return React26.createElement(Provider, null, children);
@@ -36910,7 +37185,7 @@
   );
   PiralContext.displayName = "PiralContext";
 
-  // node_modules/piral-core/esm/Piral.js
+  // node_modules/piral-core/lib/Piral.js
   var Piral = ({ instance = createInstance(), breakpoints, children }) => React27.createElement(
     PiralContext,
     { instance },
@@ -36922,10 +37197,10 @@
   );
   Piral.displayName = "Piral";
 
-  // node_modules/piral-translate/esm/create.js
+  // node_modules/piral-translate/lib/create.js
   var deepmerge = __toESM(require_cjs());
 
-  // node_modules/piral-translate/esm/actions.js
+  // node_modules/piral-translate/lib/actions.js
   function createActions2(localizer) {
     return {
       selectLanguage(ctx, selected) {
@@ -36975,7 +37250,7 @@
     };
   }
 
-  // node_modules/piral-translate/esm/flatten-translations.js
+  // node_modules/piral-translate/lib/flatten-translations.js
   function flat(source) {
     const target = {};
     flatten(source, target);
@@ -36999,7 +37274,7 @@
     }));
   }
 
-  // node_modules/piral-translate/esm/localize.js
+  // node_modules/piral-translate/lib/localize.js
   function defaultFallback(key, language) {
     if (false) {
       return language ? "..." : "";
@@ -37052,7 +37327,7 @@
     localizeBase(key, variables) {
       const message = this.translateMessage(this.messages, key, variables);
       if (message === void 0) {
-        return this.fallback(key, this.language);
+        return this.fallback(key, this.language, this.messages, variables);
       }
       return message;
     }
@@ -37064,10 +37339,10 @@
     }
   };
 
-  // node_modules/piral-translate/esm/default.js
+  // node_modules/piral-translate/lib/default.js
   var DefaultPicker = (props) => defaultRender(void 0);
 
-  // node_modules/piral-translate/esm/create.js
+  // node_modules/piral-translate/lib/create.js
   function setupLocalizer(config = {}) {
     const msgs = config.messages || {};
     const languages = Object.keys(msgs);
@@ -37126,7 +37401,7 @@
     };
   }
 
-  // node_modules/piral-dashboard/esm/actions.js
+  // node_modules/piral-dashboard/lib/actions.js
   var actions_exports2 = {};
   __export(actions_exports2, {
     registerTile: () => registerTile,
@@ -37151,14 +37426,14 @@
     }));
   }
 
-  // node_modules/piral-dashboard/esm/Dashboard.js
+  // node_modules/piral-dashboard/lib/Dashboard.js
   var React28 = __toESM(require_react());
 
-  // node_modules/piral-dashboard/esm/components.js
+  // node_modules/piral-dashboard/lib/components.js
   var PiralDashboardContainer = getPiralComponent("DashboardContainer");
   var PiralDashboardTile = getPiralComponent("DashboardTile");
 
-  // node_modules/piral-dashboard/esm/Dashboard.js
+  // node_modules/piral-dashboard/lib/Dashboard.js
   var Dashboard = (props) => {
     const tiles = useGlobalState((s) => s.registry.tiles);
     const { filter = () => true } = props;
@@ -37175,12 +37450,12 @@
   };
   Dashboard.displayName = "Dashboard";
 
-  // node_modules/piral-dashboard/esm/default.js
+  // node_modules/piral-dashboard/lib/default.js
   var React29 = __toESM(require_react());
   var DefaultContainer = (props) => React29.createElement(ExtensionSlot, { name: "dashboard", params: props, empty: () => defaultRender(props.children, "default_dashboard") });
   var DefaultTile = (props) => defaultRender(props.children);
 
-  // node_modules/piral-dashboard/esm/helpers.js
+  // node_modules/piral-dashboard/lib/helpers.js
   function getPreferences(defaultPreferences, customPreferences = {}) {
     return {
       ...defaultPreferences,
@@ -37226,7 +37501,7 @@
     });
   }
 
-  // node_modules/piral-dashboard/esm/create.js
+  // node_modules/piral-dashboard/lib/create.js
   function createDashboardApi(config = {}) {
     const { tiles = [], defaultPreferences = {}, routes = ["/"] } = config;
     return (context2) => {
@@ -37259,7 +37534,7 @@
     };
   }
 
-  // node_modules/piral-menu/esm/actions.js
+  // node_modules/piral-menu/lib/actions.js
   var actions_exports3 = {};
   __export(actions_exports3, {
     registerMenuItem: () => registerMenuItem,
@@ -37284,19 +37559,19 @@
     }));
   }
 
-  // node_modules/piral-menu/esm/default.js
+  // node_modules/piral-menu/lib/default.js
   var React30 = __toESM(require_react());
   var DefaultContainer2 = (props) => React30.createElement(ExtensionSlot, { name: `menu_${props.type}`, params: props, empty: () => defaultRender(props.children, "default_menu") });
   var DefaultItem = (props) => defaultRender(props.children);
 
-  // node_modules/piral-menu/esm/Menu.js
+  // node_modules/piral-menu/lib/Menu.js
   var React31 = __toESM(require_react());
 
-  // node_modules/piral-menu/esm/components.js
+  // node_modules/piral-menu/lib/components.js
   var PiralMenuContainer = getPiralComponent("MenuContainer");
   var PiralMenuItem = getPiralComponent("MenuItem");
 
-  // node_modules/piral-menu/esm/Menu.js
+  // node_modules/piral-menu/lib/Menu.js
   var Menu = ({ type = "general" }) => {
     const menuItems = useGlobalState((s) => s.registry.menuItems);
     const renderItems = Object.keys(menuItems).filter((name) => menuItems[name].settings.type === type).map((name) => ({
@@ -37313,7 +37588,7 @@
   };
   Menu.displayName = "Menu";
 
-  // node_modules/piral-menu/esm/create.js
+  // node_modules/piral-menu/lib/create.js
   function getSettings(defaultSettings, customSettings = {}) {
     return {
       type: "general",
@@ -37379,7 +37654,7 @@
     };
   }
 
-  // node_modules/piral-notifications/esm/actions.js
+  // node_modules/piral-notifications/lib/actions.js
   var actions_exports4 = {};
   __export(actions_exports4, {
     closeNotification: () => closeNotification,
@@ -37398,22 +37673,22 @@
     }));
   }
 
-  // node_modules/piral-notifications/esm/create.js
+  // node_modules/piral-notifications/lib/create.js
   var import_react10 = __toESM(require_react());
 
-  // node_modules/piral-notifications/esm/default.js
+  // node_modules/piral-notifications/lib/default.js
   var React32 = __toESM(require_react());
   var DefaultHost = (props) => React32.createElement("div", { className: "piral-notifications-host", key: "default_notifications" }, props.children);
   var DefaultToast = ({ children }) => defaultRender(children);
 
-  // node_modules/piral-notifications/esm/Notifications.js
+  // node_modules/piral-notifications/lib/Notifications.js
   var React33 = __toESM(require_react());
 
-  // node_modules/piral-notifications/esm/components.js
+  // node_modules/piral-notifications/lib/components.js
   var PiralNotificationsHost = getPiralComponent("NotificationsHost");
   var PiralNotificationsToast = getPiralComponent("NotificationsToast");
 
-  // node_modules/piral-notifications/esm/Notifications.js
+  // node_modules/piral-notifications/lib/Notifications.js
   var Notifications = () => {
     const notifications = useGlobalState((s) => s.notifications);
     return React33.createElement(PiralNotificationsHost, null, notifications.map(({ component: Component3, close, options, id }) => React33.createElement(
@@ -37424,7 +37699,7 @@
   };
   Notifications.displayName = "Notifications";
 
-  // node_modules/piral-notifications/esm/create.js
+  // node_modules/piral-notifications/lib/create.js
   function isElement(element) {
     return (0, import_react10.isValidElement)(element);
   }
@@ -37491,7 +37766,7 @@
     };
   }
 
-  // node_modules/piral-modals/esm/actions.js
+  // node_modules/piral-modals/lib/actions.js
   var actions_exports5 = {};
   __export(actions_exports5, {
     closeModal: () => closeModal,
@@ -37530,19 +37805,19 @@
     }));
   }
 
-  // node_modules/piral-modals/esm/default.js
+  // node_modules/piral-modals/lib/default.js
   var React34 = __toESM(require_react());
   var DefaultHost2 = (props) => React34.createElement("div", { className: "piral-modals-host" }, props.open && React34.createElement("div", { className: "piral-modals-overlay" }, props.children));
   var DefaultDialog = (props) => defaultRender(props.children);
 
-  // node_modules/piral-modals/esm/Modals.js
+  // node_modules/piral-modals/lib/Modals.js
   var React35 = __toESM(require_react());
 
-  // node_modules/piral-modals/esm/components.js
+  // node_modules/piral-modals/lib/components.js
   var PiralModalsHost = getPiralComponent("ModalsHost");
   var PiralModalsDialog = getPiralComponent("ModalsDialog");
 
-  // node_modules/piral-modals/esm/Modals.js
+  // node_modules/piral-modals/lib/Modals.js
   function closeAll(modals) {
     modals.forEach((m) => m.close());
   }
@@ -37576,7 +37851,7 @@
   };
   Modals.displayName = "Modals";
 
-  // node_modules/piral-modals/esm/create.js
+  // node_modules/piral-modals/lib/create.js
   function getModalDialogs(dialogs) {
     const modals = {};
     for (const { name, component, defaults, layout: layout2 = {} } of dialogs) {
@@ -37647,7 +37922,7 @@
     };
   }
 
-  // node_modules/piral-feeds/esm/actions.js
+  // node_modules/piral-feeds/lib/actions.js
   var actions_exports6 = {};
   __export(actions_exports6, {
     createFeed: () => createFeed,
@@ -37712,10 +37987,10 @@
     }
   }
 
-  // node_modules/piral-feeds/esm/withFeed.js
+  // node_modules/piral-feeds/lib/withFeed.js
   var React36 = __toESM(require_react());
 
-  // node_modules/piral-feeds/esm/useFeed.js
+  // node_modules/piral-feeds/lib/useFeed.js
   var import_react11 = __toESM(require_react());
   function useFeed(options) {
     const { loaded, loading, error, data } = useGlobalState((s) => s.feeds[options.id]);
@@ -37728,7 +38003,7 @@
     return [loaded, data, error];
   }
 
-  // node_modules/piral-feeds/esm/withFeed.js
+  // node_modules/piral-feeds/lib/withFeed.js
   function withFeed(Component3, options) {
     const FeedView = (props) => {
       const [loaded, data, error] = useFeed(options);
@@ -37744,7 +38019,7 @@
     return FeedView;
   }
 
-  // node_modules/piral-feeds/esm/utils.js
+  // node_modules/piral-feeds/lib/utils.js
   var noop3 = () => {
   };
   function createFeedOptions(id, resolver) {
@@ -37789,7 +38064,7 @@
     }
   }
 
-  // node_modules/piral-feeds/esm/create.js
+  // node_modules/piral-feeds/lib/create.js
   function createFeedsApi(config = {}) {
     return (context2) => {
       context2.defineActions(actions_exports6);
@@ -37829,7 +38104,7 @@
     };
   }
 
-  // node_modules/piral-ext/esm/create.js
+  // node_modules/piral-ext/lib/create.js
   function createStandardApi(settings = {}) {
     const { locale = void 0, dashboard = void 0, menu = void 0, notifications = void 0, modals = void 0, feeds = void 0 } = settings;
     return [
@@ -37842,10 +38117,10 @@
     ].filter(Boolean);
   }
 
-  // node_modules/piral-update/esm/components.js
+  // node_modules/piral-update/lib/components.js
   var PiralUpdateDialog = getPiralComponent("UpdateDialog");
 
-  // node_modules/piral-update/esm/actions.js
+  // node_modules/piral-update/lib/actions.js
   var actions_exports7 = {};
   __export(actions_exports7, {
     approveUpdate: () => approveUpdate,
@@ -37865,43 +38140,69 @@
   function computePiletHash(pilets) {
     return JSON.stringify(pilets.map(getPiletHash).sort(sortPilets));
   }
-  function rejectUpdate(ctx) {
+  function reset(ctx) {
     ctx.dispatch((state) => ({
       ...state,
       updatability: {
         ...state.updatability,
-        target: [],
+        added: [],
+        updated: [],
+        removed: [],
         active: false
       }
     }));
   }
-  function approveUpdate(ctx) {
-    const pilets = ctx.readState((s) => s.updatability.target);
-    for (const pilet of pilets) {
-      ctx.addPilet(pilet);
+  async function apply(ctx) {
+    const { added, removed, updated } = ctx.readState((s) => s.updatability);
+    for (const pilet of removed) {
+      await ctx.removePilet(pilet.name);
     }
-    ctx.rejectUpdate();
+    for (const pilet of updated) {
+      await ctx.removePilet(pilet.name);
+      await ctx.addPilet(pilet);
+    }
+    for (const pilet of added) {
+      await ctx.addPilet(pilet);
+    }
+  }
+  function rejectUpdate(ctx) {
+    reset(ctx);
+  }
+  function approveUpdate(ctx) {
+    apply(ctx);
+    reset(ctx);
   }
   function checkForUpdates(ctx, pilets) {
-    const checkHash = computePiletHash(pilets);
-    const lastHash = ctx.readState((s) => s.updatability.lastHash || computePiletHash(s.modules));
-    if (checkHash !== lastHash) {
+    const currentHash = computePiletHash(pilets);
+    const currentPilets = ctx.readState((s) => s.modules);
+    const previousHash = ctx.readState((s) => s.updatability.lastHash || computePiletHash(currentPilets));
+    if (currentHash !== previousHash) {
       const currentModes = ctx.readState((s) => s.registry.updatability);
-      const piletNames = Object.keys(currentModes);
-      const blocked = piletNames.filter((m) => currentModes[m].mode === "block");
-      const ask = piletNames.filter((m) => currentModes[m].mode === "ask");
-      const target = pilets.filter((pilet) => !blocked.includes(pilet.name));
-      const active = ask.length > 0;
+      const currentPiletNames = currentPilets.map((m) => m.name);
+      const isPending = (pilet) => currentModes[pilet.name]?.mode === "ask";
+      const isNotBlocked = (pilet) => currentModes[pilet.name]?.mode !== "block";
+      const added = pilets.filter((m) => !currentPiletNames.includes(m.name));
+      const removed = currentPilets.filter((m) => !pilets.some((p) => p.name === m.name) && isNotBlocked(m));
+      const updated = pilets.filter((pilet) => {
+        if ("version" in pilet && isNotBlocked(pilet)) {
+          const version = currentPilets.find((m) => m.name === pilet.name)?.version;
+          return !!version && version !== pilet.version;
+        }
+        return false;
+      });
       ctx.dispatch((state) => {
-        if (!active) {
+        const anyPendingDecision = [...removed, ...updated].some(isPending);
+        if (!anyPendingDecision) {
           setTimeout(ctx.approveUpdate, 0);
         }
         return {
           ...state,
           updatability: {
-            active,
-            lastHash: checkHash,
-            target
+            active: anyPendingDecision,
+            lastHash: currentHash,
+            added,
+            removed,
+            updated
           }
         };
       });
@@ -37917,10 +38218,10 @@
     }));
   }
 
-  // node_modules/piral-update/esm/default.js
+  // node_modules/piral-update/lib/default.js
   var DefaultUpdateDialog = (props) => defaultRender(props.children);
 
-  // node_modules/piral-update/esm/helpers.js
+  // node_modules/piral-update/lib/helpers.js
   function checkPeriodically(options = {}) {
     const { period = 5 * 60 * 1e3 } = options;
     return (notify, context2) => {
@@ -37930,7 +38231,7 @@
     };
   }
 
-  // node_modules/piral-update/esm/create.js
+  // node_modules/piral-update/lib/create.js
   function createUpdateApi(config = {}) {
     const { listen = checkPeriodically() } = config;
     return (context2) => {
@@ -37948,12 +38249,15 @@
         updatability: {
           active: false,
           lastHash: void 0,
-          target: []
+          added: [],
+          removed: [],
+          updated: []
         }
       }));
       listen(context2.checkForUpdates, context2);
       return (_, target) => {
         const pilet = target.name;
+        target.config;
         return {
           canUpdate(mode) {
             context2.setUpdateMode(pilet, mode);
@@ -37963,12 +38267,13 @@
     };
   }
 
-  // node_modules/piral-update/esm/UpdateDialog.js
+  // node_modules/piral-update/lib/UpdateDialog.js
   var React37 = __toESM(require_react());
   var UpdateDialog = () => {
     const actions = useActions();
-    const { active, target } = useGlobalState((m) => m.updatability);
-    return React37.createElement(React37.Fragment, null, active && React37.createElement(PiralUpdateDialog, { piletsToUpdate: target, onApprove: actions.approveUpdate, onReject: actions.rejectUpdate }));
+    const { active, updated, removed } = useGlobalState((m) => m.updatability);
+    const piletsToUpdate = [...updated, ...removed];
+    return React37.createElement(React37.Fragment, null, active && React37.createElement(PiralUpdateDialog, { piletsToUpdate, onApprove: actions.approveUpdate, onReject: actions.rejectUpdate }));
   };
 
   // src/SelectUser.tsx
